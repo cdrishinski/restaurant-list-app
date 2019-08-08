@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import RestaurantList from '../RestaurantList.json';
+import List from './List'
 
 
 export default class Restaurant extends Component {
     constructor(props){
         super(props)
         this.state= {
-            search: "",
+            search: " ",
             searchResults: []
     }
 }
 
 
-filterRestaurants (){
+filterRestaurants (text){
+    this.setState({search: text.target.value})
     let localArr = RestaurantList.filter(currVal => {
-       return currVal.name.indexOf(this.state.search) != -1; 
+       return currVal.name.indexOf(this.state.search) != -1 || this.state.search == ''; 
     })
-    console.log(localArr)
+    this.setState({searchResults: localArr})
 }
    
 
@@ -26,11 +28,13 @@ filterRestaurants (){
             <div>
                 <h1>Restaurant page!</h1>
 
-                <input type="text" placeholder="Search Restaurants" onChange={(text) => this.setState({search: text.target.value})} value={this.state.search} />
+                <input type="text" placeholder="Search Restaurants" onChange={(text) => this.filterRestaurants(text)} value={this.state.search} />
 
             
                 <ul>
-                    { this.filterRestaurants() }
+                    
+                    <List searchResults={this.state.searchResults} />
+                    
                 {/* { RestaurantList.filter( (restDetail, index) =>{ 
                 //         (
                 //             <div>

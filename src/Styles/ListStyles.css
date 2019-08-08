@@ -1,0 +1,11 @@
+.RestList{
+    list-style-type: none;
+    font-size: 1.2em;
+}
+
+.TimesList {
+    list-style-type: none;
+    font-size: 0.9em;
+    padding-bottom: 15px;
+    color:rgb(113, 163, 245);
+}
